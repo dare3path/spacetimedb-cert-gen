@@ -1,9 +1,16 @@
 #!/usr/bin/bash
 
+set -xe
+
 #Create a Certificate Signing Request (CSR) for the Server: 
 #openssl req -new -key server.key -out server.csr -subj "/CN=localhost"
+#openssl req -new -key server.key -out server.csr -config san.cnf -subj "/CN=localhost"
 openssl req -new -key server.key -out server.csr -config san.cnf
 
 #    -subj "/CN=localhost": Sets the server’s CN to “localhost” (use your domain if different, e.g., /CN=example.com).
 #    Output: server.csr—the Certificate Signing Request (temporary file).
 
+#Verify the CSR (Optional)
+openssl req -in server.csr -noout -text | grep -i localhost
+
+echo "all done."

@@ -4,9 +4,25 @@
 [req]
 distinguished_name = req_distinguished_name
 req_extensions = v3_req
+# Disable interactive prompts, else to not prompt you it needs arg: -subj "/CN=localhost"
+prompt = no
 
 [req_distinguished_name]
 CN = localhost
+# can comment out the following:
+## Optional: Add more DN fields if needed (can leave blank with .)
+## Country code (blank) - nah, blank is not accepted as per: openssl req -new -key server.key -out server.csr -config san.cnf
+##Error making certificate request
+##805B2975357C0000:error:06800098:asn1 encoding routines:ASN1_mbstring_ncopy:string too short:crypto/asn1/a_mbstr.c:100:minsize=2
+#C = US
+## State (blank)
+#ST = state
+## Locality (blank)
+#L = locality
+## Organization (blank)
+#O = organization
+## Organizational Unit (blank)
+#OU = org unit
 
 [v3_req]
 subjectAltName = DNS:localhost,IP:127.0.0.1
