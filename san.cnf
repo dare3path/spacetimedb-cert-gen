@@ -1,0 +1,13 @@
+#this is server's config file in order to can add Subject Alternative Name(s)
+#If you want the server cert to work with multiple names (e.g., localhost, 127.0.0.1), create a config file san.cnf:
+
+[req]
+distinguished_name = req_distinguished_name
+req_extensions = v3_req
+
+[req_distinguished_name]
+CN = localhost
+
+[v3_req]
+subjectAltName = DNS:localhost,IP:127.0.0.1
+

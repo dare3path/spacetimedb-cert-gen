@@ -1,0 +1,8 @@
+#!/usr/bin/bash
+
+
+#Generate the Server’s Private Key: 
+openssl genrsa -out server.key 4096
+
+#    Output: server.key—the server’s private key (keep secret).
+

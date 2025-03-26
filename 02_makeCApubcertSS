@@ -1,0 +1,10 @@
+#!/usr/bin/bash
+
+#Create the CA’s Self-Signed Certificate: 
+openssl req -x509 -new -nodes -key ca.key -sha256 -days 3650 -out ca.crt -subj "/CN=MyLocalCA"
+
+#    -x509: Makes it a self-signed CA certificate.
+#    -days 3650: Valid for 10 years (adjust as needed).
+#    -subj "/CN=MyLocalCA": Sets the Common Name (CN) to “MyLocalCA” (customize if you like).
+#    Output: ca.crt—the CA’s public certificate (shareable).
+

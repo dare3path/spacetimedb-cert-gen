@@ -1,0 +1,6 @@
+#!/usr/bin/bash
+
+#Generate the CA’s Private Key: 
+openssl genrsa -out ca.key 4096
+#    Output: ca.key—the CA’s private key (keep this secret).
+

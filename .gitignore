@@ -1,0 +1,15 @@
+#CA files
+# CA’s private key (secret, keep safe).
+ca.key
+# CA’s public certificate (share with clients like the CLI).
+ca.crt
+#Server Files:
+# Server’s private key (secret, pass to server with --key).
+server.key
+# Server’s public certificate (signed by ca.crt, pass to server with --cert).
+server.crt
+# Temporary CSR (can delete after signing).
+server.csr
+# Serial number file (optional, for CA tracking).
+ca.srl
+

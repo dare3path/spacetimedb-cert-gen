@@ -1,0 +1,14 @@
+#!/usr/bin/bash
+
+#Sign the Server’s CSR with the Local CA: 
+#openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out server.crt -days 365 -sha256
+openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out server.crt -days 365 -sha256 -extfile san.cnf -extensions v3_req
+
+#    -CA ca.crt: Uses the CA’s certificate.
+#    -CAkey ca.key: Uses the CA’s private key to sign.
+#    -CAcreateserial: Generates a serial number file (ca.srl) for tracking.
+#    -days 365: Server cert valid for 1 year.
+#    Output:
+#        server.crt—the server’s signed public certificate.
+#        ca.srl—a serial number file (can be ignored or reused for future certs).
+
