@@ -1,0 +1,5 @@
+#!/usr/bin/bash
+
+#show the server cert(public) which was signed by the local CA
+openssl x509 -in server.crt -noout -text | less
+
