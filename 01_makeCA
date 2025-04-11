@@ -1,4 +1,9 @@
 #!/usr/bin/bash
+# Copyright (c) 2025 dare3path
+# Licensed under the Apache License 2.0 (see LICENSE-APACHE.txt)
+# Licensed under the Business Source License 1.1 (see LICENSE-BSL.txt)
+# Licensed under the MIT License (see LICENSE-MIT.txt)
+# Use any one of these licenses at your option.
 
 #Generate the CA’s Private Key: 
 openssl genrsa -out ca.key 4096
