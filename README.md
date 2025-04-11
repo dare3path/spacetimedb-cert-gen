@@ -29,11 +29,11 @@ spacetime server list
 spacetime logout
 spacetime login --server-issued-login "$servernick" --cert ../../spacetimedb-cert-gen/ca.crt
 ```
-  - publish example:
+  - publish example:  
   `spacetime publish --project-path server quickstart-chat --cert ../../spacetimedb-cert-gen/ca.crt`
-  - follow the logs:
+  - follow the logs:  
 `spacetime logs --follow quickstart-chat --cert ../../spacetimedb-cert-gen/ca.crt`
-  - wipe the database:
+  - wipe the database:  
     `spacetime delete quickstart-chat --cert ../../spacetimedb-cert-gen/ca.crt`
 
 ## Extra
