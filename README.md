@@ -29,9 +29,12 @@ spacetime server list
 spacetime logout
 spacetime login --server-issued-login "$servernick" --cert ../../spacetimedb-cert-gen/ca.crt
 ```
-  - publish example: `spacetime publish --project-path server quickstart-chat --cert ../../spacetimedb-cert-gen/ca.crt`
-  - follow the logs: `spacetime logs --follow quickstart-chat --cert ../../spacetimedb-cert-gen/ca.crt`
-  - wipe the database: `spacetime delete quickstart-chat --cert ../../spacetimedb-cert-gen/ca.crt`
+  - publish example:
+  `spacetime publish --project-path server quickstart-chat --cert ../../spacetimedb-cert-gen/ca.crt`
+  - follow the logs:
+`spacetime logs --follow quickstart-chat --cert ../../spacetimedb-cert-gen/ca.crt`
+  - wipe the database:
+    `spacetime delete quickstart-chat --cert ../../spacetimedb-cert-gen/ca.crt`
 
 ## Extra
 - (optional) generically test that the server is listening as TLS and a client that has that CA in its root store(ie. trusts that local CA we made) can connect to it: `openssl s_client -connect 127.1.2.3:6543 -CAfile ../../spacetimedb-cert-gen/ca.crt ; echo $?`
