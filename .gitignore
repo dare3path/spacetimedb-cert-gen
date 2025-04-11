@@ -1,7 +1,7 @@
 #CA files
 # CA’s private key (secret, keep safe).
 ca.key
-# CA’s public certificate (share with clients like the CLI).
+# CA’s public certificate (share with clients like the CLI, use with their --cert arg).
 ca.crt
 #Server Files:
 # Server’s private key (secret, pass to server with --key).

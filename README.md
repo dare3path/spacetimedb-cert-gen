@@ -12,6 +12,16 @@ Bash scripts to generate TLS certificates for SpacetimeDB standalone server, com
 5. `05_signCSRwiththeCA`: Signs the CSR with the CA thus generating `server.crt` Server’s public certificate (pass to spacetimedb standalone server with --cert)
 6. `06_showServerpubcert`: Displays the server’s public cert, for informational purposes only. (optional)
 
+## Generated Files
+Ignored by `.gitignore`—ie. don’t commit these!
+- `ca.key`: CA private key (secret, keep safe).
+- `ca.crt`: CA public cert (share with clients with --cert arg).
+- `server.key`: Server private key (pass to server with --key).
+- `server.crt`: Server public cert (pass to server with --cert).
+- `server.csr`: Temporary CSR (can delete after signing).
+- `ca.srl`: Serial number file (optional, for CA tracking).
+
+
 ## Usage
 - optionally edit `./san.cnf` (ie. use different local IPs, hostname other than localhost?)
 - you make a CA only once ever(in theory), so run `./01_makeCA` then `./02_makeCApubcertSS`
