@@ -13,7 +13,7 @@ Bash scripts to generate TLS certificates for SpacetimeDB standalone server, com
 6. `06_showServerpubcert`: Displays the server’s public cert, for informational purposes only. (optional)
 
 ## Usage
-- optionally edit `./san.snf` (ie. use different local IPs, hostname other than localhost?)
+- optionally edit `./san.cnf` (ie. use different local IPs, hostname other than localhost?)
 - you make a CA only once ever(in theory), so run `./01_makeCA` then `./02_makeCApubcertSS`
 - make a new server private key(can run this as often as you want, afterwards): `./03_genServerPrivKey`, makes a new `server.key` file.
 - make a temporary Certificate Signing Request (CSR) `server.csr` which you'd send to the CA(which in our case is a local CA we made above) for them to sign, by running `./04_gentempCSRforServer`
