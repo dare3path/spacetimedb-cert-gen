@@ -25,5 +25,5 @@ CN = localhost
 #OU = org unit
 
 [v3_req]
-subjectAltName = DNS:localhost,IP:127.0.0.1
+subjectAltName = DNS:localhost,IP:127.0.0.1,IP:127.1.2.3
 
