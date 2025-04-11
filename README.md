@@ -13,15 +13,12 @@ Bash scripts to generate TLS certificates for SpacetimeDB standalone server, com
 6. `06_showServerpubcert`: Displays the server’s public cert, for informational purposes only. (optional)
 
 ## Usage
-- optionally edit `./san.snf` (ie. use different local IPs, hostname othen than localhost?)
+- optionally edit `./san.snf` (ie. use different local IPs, hostname other than localhost?)
 - you make a CA only once ever(in theory), so run `./01_makeCA` then `./02_makeCApubcertSS`
 - make a new server private key(can run this as often as you want, afterwards): `./03_genServerPrivKey`, makes a new `server.key` file.
 - make a temporary Certificate Signing Request (CSR) `server.csr` which you'd send to the CA(which in our case is a local CA we made above) for them to sign, by running `./04_gentempCSRforServer`
 - as the local CA you can now sign that CSR with own CA private key, by running `./05_signCSRwiththeCA` and thus generating the server's public cert as `server.crt` which you can look at/inspect via `./06_showServerpubcert`
-- you can start your spacetimedb standalone server now like the following by passing the server's private+public keys:
-```bash
-spacetime start --edition standalone --listen-addr 127.1.2.3:6543 --ssl --cert ../spacetimedb-cert-gen/server.crt --key ../spacetimedb-cert-gen/server.key
-```
+- you can start your spacetimedb standalone server now like the following by passing the server's private+public keys: `spacetime start --edition standalone --listen-addr 127.1.2.3:6543 --ssl --cert ../spacetimedb-cert-gen/server.crt --key ../spacetimedb-cert-gen/server.key`
 - as a client connecting via TLS to that spacetimedb standalone server you can use the CA's public cert which can verify that your server's public key was signed by that CA:
   - login example:
 ```bash
@@ -32,24 +29,12 @@ spacetime server list
 spacetime logout
 spacetime login --server-issued-login "$servernick" --cert ../../spacetimedb-cert-gen/ca.crt
 ```
-  - publish example:
-```bash
-spacetime publish --project-path server quickstart-chat --cert ../../spacetimedb-cert-gen/ca.crt
-```
-  - follow the logs:
-```bash
-spacetime logs --follow quickstart-chat --cert ../../spacetimedb-cert-gen/ca.crt
-```
-  - wipe the database:
-```bash
-spacetime delete quickstart-chat --cert ../../spacetimedb-cert-gen/ca.crt
-```
+  - publish example: `spacetime publish --project-path server quickstart-chat --cert ../../spacetimedb-cert-gen/ca.crt`
+  - follow the logs: `spacetime logs --follow quickstart-chat --cert ../../spacetimedb-cert-gen/ca.crt`
+  - wipe the database: `spacetime delete quickstart-chat --cert ../../spacetimedb-cert-gen/ca.crt`
 
 ## Extra
-- (optional) generically test that the server is listening as TLS and a client that has that CA in its root store(ie. trusts that local CA we made) can connect to it:
-```bash
-openssl s_client -connect 127.1.2.3:6543 -CAfile ../../spacetimedb-cert-gen/ca.crt ; echo $?
-```
+- (optional) generically test that the server is listening as TLS and a client that has that CA in its root store(ie. trusts that local CA we made) can connect to it: `openssl s_client -connect 127.1.2.3:6543 -CAfile ../../spacetimedb-cert-gen/ca.crt ; echo $?`
 - Instead of `ca.crt` you can use `server.crt` for `--cert` arg, thus you don't need a local CA, in case you just want to use a simpler way via a self-signed server cert.
 
 ## Credits
