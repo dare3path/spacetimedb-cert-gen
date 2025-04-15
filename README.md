@@ -28,7 +28,7 @@ Ignored by `.gitignore`—ie. don’t commit these!
 - make a new server private key(can run this as often as you want, afterwards): `./03_genServerPrivKey`, makes a new `server.key` file.
 - make a temporary Certificate Signing Request (CSR) `server.csr` which you'd send to the CA(which in our case is a local CA we made above) for them to sign, by running `./04_gentempCSRforServer`
 - as the local CA you can now sign that CSR with own CA private key, by running `./05_signCSRwiththeCA` and thus generating the server's public cert as `server.crt` which you can look at/inspect via `./06_showServerpubcert`
-- you can start your spacetimedb standalone server now like the following by passing the server's private+public keys: `spacetime start --edition standalone --listen-addr 127.1.2.3:6543 --ssl --cert ../spacetimedb-cert-gen/server.crt --key ../spacetimedb-cert-gen/server.key`
+- you can start your spacetimedb standalone server now like the following by passing the server's private key and public cert, like this: `spacetime start --edition standalone --listen-addr 127.1.2.3:6543 --ssl --cert ../spacetimedb-cert-gen/server.crt --key ../spacetimedb-cert-gen/server.key`
 - as a client connecting via TLS to that spacetimedb standalone server you can use the CA's public cert which can verify that your server's public key was signed by that CA:
   - login example:
 ```bash

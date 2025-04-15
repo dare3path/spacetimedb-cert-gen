@@ -5,8 +5,12 @@
 # Licensed under the MIT License (see LICENSE-MIT.txt)
 # Use any one of these licenses at your option.
 
+#validity of local Certificate Authority(CA)'s certificate (contains CA's public key), 10 years:
+CA_CERT_DAYS=3650
+COMMON_NAME="MyLocalCA"
+
 #Create the CA’s Self-Signed Certificate: 
-openssl req -x509 -new -nodes -key ca.key -sha256 -days 3650 -out ca.crt -subj "/CN=MyLocalCA"
+openssl req -x509 -new -nodes -key ca.key -sha256 -days "$CA_CERT_DAYS" -out ca.crt -subj "/CN=${COMMON_NAME}"
 
 #    -x509: Makes it a self-signed CA certificate.
 #    -days 3650: Valid for 10 years (adjust as needed).

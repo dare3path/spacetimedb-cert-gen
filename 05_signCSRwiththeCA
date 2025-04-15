@@ -5,9 +5,12 @@
 # Licensed under the MIT License (see LICENSE-MIT.txt)
 # Use any one of these licenses at your option.
 
+# Set your desired validity in days for how long the server certificate(which contains the public key) is valid.
+SERVER_CERT_DAYS=365
+
 #Sign the Server’s CSR with the Local CA: 
 #openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out server.crt -days 365 -sha256
-openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out server.crt -days 365 -sha256 -extfile san.cnf -extensions v3_req
+openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out server.crt -days "$SERVER_CERT_DAYS" -sha256 -extfile san.cnf -extensions v3_req
 
 #    -CA ca.crt: Uses the CA’s certificate.
 #    -CAkey ca.key: Uses the CA’s private key to sign.
