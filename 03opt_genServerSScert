@@ -10,6 +10,16 @@ SERVER_CERT_DAYS=365
 #generate self-signed server certificate
 openssl req -x509 -new -key server.key -out serverSS.crt -sha256 -days "$SERVER_CERT_DAYS" -nodes -config san.cnf
 
+# req : Invokes OpenSSL’s certificate request and certificate generation module. It’s used to create certificate signing requests (CSRs) or, in this case, certificates directly.
+# -x509 : Instructs OpenSSL to output a self-signed certificate instead of a certificate signing request (CSR).
+# -new : Indicates that a new certificate request should be generated.
+# -key server.key : Specifies the input private key file to use for the certificate.
+# -out serverSS.crt : Specifies the output file for the generated certificate.
+# -sha256 : Sets the message digest (hash algorithm) for the certificate’s signature to SHA-256.
+# -days : Sets the validity period of the certificate in days.
+# -nodes : Stands for “no DES” (no encryption). Prevents OpenSSL from encrypting the private key in the output (if a new key were generated). Since you’re using an existing server.key and not generating a new key, -nodes has no effect in this command. Normally, -nodes is relevant when creating a new key (e.g., with -newkey rsa:2048), ensuring the output key isn’t passphrase-protected.
+# -config san.cnf : Specifies a configuration file to define certificate details, such as Distinguished Name (DN), Subject Alternative Names (SANs), and other settings.
+
 #XXX: this will NOT work:
 #openssl verify -CAfile ca.crt serverSS.crt
 
