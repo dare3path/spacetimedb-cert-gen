@@ -8,8 +8,13 @@ ca.crt
 server.key
 # Server’s public certificate (signed by ca.crt, pass to server with --cert).
 server.crt
+# Server’s self-signed public certificate (pass to server(and clients) with --cert).
+serverSS.crt
 # Temporary CSR (can delete after signing).
 server.csr
 # Serial number file (optional, for CA tracking).
 ca.srl
 
+#temp:
+server.key2
+server.crt2

@@ -20,3 +20,8 @@ openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out s
 #        server.crt—the server’s signed public certificate.
 #        ca.srl—a serial number file (can be ignored or reused for future certs).
 
+#this will work:
+openssl verify -CAfile ca.crt server.crt
+#XXX: this will NOT work:
+#openssl verify -CAfile server.crt server.crt
+
