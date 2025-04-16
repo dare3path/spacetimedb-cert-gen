@@ -5,7 +5,7 @@
 # Licensed under the MIT License (see LICENSE-MIT.txt)
 # Use any one of these licenses at your option.
 
-set -xe
+set -e
 
 #Create a Certificate Signing Request (CSR) for the Server: 
 #openssl req -new -key server.key -out server.csr -subj "/CN=localhost"
