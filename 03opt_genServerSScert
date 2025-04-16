@@ -8,7 +8,10 @@
 SERVER_CERT_DAYS=365
 
 #generate self-signed server certificate
-openssl req -x509 -new -key server.key -out serverSS.crt -sha256 -days "$SERVER_CERT_DAYS" -nodes -config san.cnf
+#openssl req -x509 -new -key server.key -out serverSS.crt -sha256 -days "$SERVER_CERT_DAYS" -nodes -config san.cnf
+
+#same as above but we want to append " self-signed" to the OU, w/o modding san.cnf on disk, so:
+openssl req -x509 -new -key server.key -out serverSS.crt -sha256 -days "$SERVER_CERT_DAYS" -nodes -config <(sed 's/\([[:space:]]*OU[[:space:]]*=[[:space:]]*.*\)$/\1 self-signed/' san.cnf )
 
 # req : Invokes OpenSSL’s certificate request and certificate generation module. It’s used to create certificate signing requests (CSRs) or, in this case, certificates directly.
 # -x509 : Instructs OpenSSL to output a self-signed certificate instead of a certificate signing request (CSR).
