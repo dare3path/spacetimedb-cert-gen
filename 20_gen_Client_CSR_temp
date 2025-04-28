@@ -1,0 +1,3 @@
+#/usr/bin/bash
+
+openssl req -new -key client1.key -out client1.csr -config client1.cnf -sha256

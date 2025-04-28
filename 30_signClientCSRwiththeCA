@@ -1,0 +1,11 @@
+#!/usr/bin/bash
+
+CLIENT_CERT_DAYS=365
+set -ex
+openssl x509 -req -in client1.csr -CA ca4clients.crt -CAkey ca4clients.key -CAcreateserial -out client1.crt -days "$CLIENT_CERT_DAYS" -sha256 -extfile client1.cnf -extensions this_section
+# -config is not supported by openssl x509
+
+openssl verify -CAfile ca4clients.crt client1.crt
+
+openssl x509 -in client1.crt -text -noout | less
+echo "Done"

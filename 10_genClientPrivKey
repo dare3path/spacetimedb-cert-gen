@@ -1,0 +1,3 @@
+#!/usr/bin/bash
+
+openssl genrsa -out client1.key 4096
