@@ -18,3 +18,8 @@ ca.srl
 #temp:
 server.key2
 server.crt2
+
+*.key
+*.crt
+*.csr
+*.srl

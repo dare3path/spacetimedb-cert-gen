@@ -7,10 +7,12 @@
 
 # Set your desired validity in days for how long the server certificate(which contains the public key) is valid.
 SERVER_CERT_DAYS=365
-
+set -ex
 #Sign the Server’s CSR with the Local CA: 
 #openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out server.crt -days 365 -sha256
-openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out server.crt -days "$SERVER_CERT_DAYS" -sha256 -extfile san.cnf -extensions v3_req
+openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out server.crt -days "$SERVER_CERT_DAYS" -sha256 -extfile san.cnf -extensions arbitrary_name_2
+#openssl x509 is for manipulating existing certificates or signing CSRs, focusing on certificate output. It doesn’t need the full [req] section (e.g., default_md, prompt), only specific extensions, so it uses -extfile/-extensions to target those.
+#This is an OpenSSL architectural quirk: x509 commands are more limited in config parsing, forcing the use of -extfile for extensions.
 
 #    -CA ca.crt: Uses the CA’s certificate.
 #    -CAkey ca.key: Uses the CA’s private key to sign.
@@ -24,4 +26,4 @@ openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out s
 openssl verify -CAfile ca.crt server.crt
 #XXX: this will NOT work:
 #openssl verify -CAfile server.crt server.crt
-
+echo "Done"

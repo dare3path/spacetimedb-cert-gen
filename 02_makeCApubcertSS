@@ -9,11 +9,37 @@
 CA_CERT_DAYS=3650
 COMMON_NAME="MyLocalCA"
 
+expected_ext="key"
+if test ":$1" == ":"; then
+  filekey="ca.${expected_ext}" # ca.key
+else
+  filekey="$1"
+fi
+base="$(basename --suffix=key -- "$filekey")" #contains the ".", like: "ca."
+if test "$filekey" != "${base}${expected_ext}"; then  # ca.pem != ca.key
+  echo "Expected that '$filekey' has .${expected_ext} extension." >&2
+  exit 1
+fi
+filecert="${base}crt"
+
+if ! test -f "$filekey"; then
+  echo "Private CA key file '$filekey' doesn't already exist! Pass it as 1st arg, it must have .key extension. A .crt cert will be generated. eg. ca.key -> ca.crt" >&2
+  exit 1
+fi
+if test -f "$filecert"; then
+  echo "CA cert file that's about to be generated already exists: '$filecert'" >&2
+  exit 1
+fi
+
+
 #Create the CA’s Self-Signed Certificate: 
-openssl req -x509 -new -nodes -key ca.key -sha256 -days "$CA_CERT_DAYS" -out ca.crt -subj "/CN=${COMMON_NAME}"
+openssl req -x509 -new -nodes -key "$filekey" -sha256 -days "$CA_CERT_DAYS" -out "$filecert" -subj "/CN=${COMMON_NAME}"
 
 #    -x509: Makes it a self-signed CA certificate.
 #    -days 3650: Valid for 10 years (adjust as needed).
 #    -subj "/CN=MyLocalCA": Sets the Common Name (CN) to “MyLocalCA” (customize if you like).
 #    Output: ca.crt—the CA’s public certificate (shareable).
 
+if test -f "$filecert"; then
+  echo "Made CA cert file '$filecert'" >&2
+fi

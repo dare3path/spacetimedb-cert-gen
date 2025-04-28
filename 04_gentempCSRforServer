@@ -11,6 +11,7 @@ set -e
 #openssl req -new -key server.key -out server.csr -subj "/CN=localhost"
 #openssl req -new -key server.key -out server.csr -config san.cnf -subj "/CN=localhost"
 openssl req -new -key server.key -out server.csr -config san.cnf
+#openssl req is designed for creating certificate requests or self-signed certificates, so it uses -config to handle the entire certificate generation process (DN, extensions, etc.).
 
 #    -subj "/CN=localhost": Sets the server’s CN to “localhost” (use your domain if different, e.g., /CN=example.com).
 #    Output: server.csr—the Certificate Signing Request (temporary file).

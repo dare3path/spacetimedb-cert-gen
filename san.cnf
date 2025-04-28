@@ -2,12 +2,15 @@
 #If you want the server cert to work with multiple names (e.g., localhost, 127.0.0.1), create a config file san.cnf:
 
 [req]
-distinguished_name = req_distinguished_name
-req_extensions = v3_req
+distinguished_name = arbitrarily_named_1
+#If -sha256 wasn't specified on cmdline, it will be used anyway:
+default_md = sha256
+# In the [req] section of an OpenSSL config (e.g., san.cnf or client.cnf), req_extensions specifies the name of a section containing extensions to include in the certificate request (CSR) or certificate.
+req_extensions = arbitrary_name_2
 # Disable interactive prompts, else to not prompt you it needs arg: -subj "/CN=localhost"
 prompt = no
 
-[req_distinguished_name]
+[arbitrarily_named_1]
 CN = localhost
 # can comment out the following:
 ## Optional: Add more DN fields if needed (can leave blank with .)
@@ -25,6 +28,13 @@ CN = localhost
 #OU = org unit
 OU = localhost server
 
-[v3_req]
-subjectAltName = DNS:localhost,IP:127.0.0.1,IP:127.1.2.3
+[arbitrary_name_2]
+#These extensions (e.g., Subject Alternative Names) are applied when generating a CSR (openssl req -new) or certificate (openssl req -x509).
+#subjectAltName = DNS:localhost,IP:127.0.0.1,IP:127.1.2.3
+subjectAltName = @alt_names_arbitrarilynamed
+
+[alt_names_arbitrarilynamed]
+DNS.1 = localhost
+IP.1 = 127.0.0.1
+IP.2 = 127.1.2.3
 

@@ -5,7 +5,19 @@
 # Licensed under the MIT License (see LICENSE-MIT.txt)
 # Use any one of these licenses at your option.
 
+if test ":$1" != ":"; then
+  file="$1"
+else
+  file="ca.key"
+fi
+if test -f "$file"; then
+  echo "Target file $file already exists, aborting... Pass the (new)filename with .key extension on command line as first arg." >&2
+  exit 1
+fi
 #Generate the CA’s Private Key: 
-openssl genrsa -out ca.key 4096
+openssl genrsa -verbose -out "$file" 4096
 #    Output: ca.key—the CA’s private key (keep this secret).
+if test -f "$file"; then
+  echo "Made file: $file" >&2
+fi
 
