@@ -7,13 +7,14 @@
 
 #validity of local Certificate Authority(CA)'s certificate (contains CA's public key), 10 years:
 CA_CERT_DAYS=3650
-COMMON_NAME="MyLocalCA"
 
 expected_ext="key"
 if test ":$1" == ":"; then
   filekey="ca.${expected_ext}" # ca.key
+  COMMON_NAME="MyLocalCA"
 else
   filekey="$1"
+  COMMON_NAME="MyLocalCA4Clients"
 fi
 base="$(basename --suffix=key -- "$filekey")" #contains the ".", like: "ca."
 if test "$filekey" != "${base}${expected_ext}"; then  # ca.pem != ca.key
